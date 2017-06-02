@@ -32,7 +32,12 @@ describe('Generate SW End-to-End Tests', function() {
 
     return testServer.stop()
       .then(() => fsExtra.remove(tmpDirectory))
-      .catch((error) => console.log(error));
+      .catch((err) => {
+        // This is an issue on Windows where the file system is locked
+        // but there doesn't seem to be a fixed based on a number of
+        // issues raised on the same subject on Github.
+        console.err(err);
+      });
   });
 
   it('should be able to generate a service for example-1 with CLI', function() {
