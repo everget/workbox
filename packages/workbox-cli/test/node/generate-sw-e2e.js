@@ -1,7 +1,7 @@
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const path = require('path');
-const proxyquire = require('proxyquire');
+const proxyquire = require('proxyquire').noPreserveCache();
 
 const testServerGen = require('../../../../utils/test-server-generator.js');
 const validator = require('../utils/e2e-sw-validator.js');
@@ -36,7 +36,7 @@ describe('Generate SW End-to-End Tests', function() {
         // This is an issue on Windows where the file system is locked
         // but there doesn't seem to be a fixed based on a number of
         // issues raised on the same subject on Github.
-        console.err(err);
+        console.error(err);
       });
   });
 
